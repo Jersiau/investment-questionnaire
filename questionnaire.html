@@ -198,9 +198,7 @@
             <select id="marketEventReaction" name="marketEventReaction">
                 <option value="1">Very negatively</option>
                 <option value="2">Negatively</option>
-                <option value="3">Neutral</option>
-                <option value="4">Positively</option>
-                <option value="5">Very positively</option>
+                <option value="4">Neutral</option>
             </select>
         </div>
         <div>
@@ -239,7 +237,7 @@
         let portfolio = '';
         if (cryptoInvestment === 'yes') {
             // Assign one of the two most risky portfolios based on the score
-            if (totalScore < 192) {
+            if (totalScore < 178) {
                 portfolio = 'Very Aggressive: BOTZ, LIT, GBTC';
             } else {
                 portfolio = 'Highly Speculative: GBTC, LIT, BOTZ';
@@ -294,19 +292,19 @@
     function assignPortfolio(score) {
         if (score <= 45) {
             return 'Very Conservative: MUB, VCIT';
-        } else if (score <= 66) {
+        } else if (score <= 64) {
             return 'Conservative: AGG, MUB, ESGV';
-        } else if (score <= 87) {
+        } else if (score <= 83) {
             return 'Slightly Conservative: TLT, VCIT, ESGV';
-        } else if (score <= 108) {
+        } else if (score <= 102) {
             return 'Moderately Conservative: ITOT, AGG, MINT';
-        } else if (score <= 129) {
+        } else if (score <= 121) {
             return 'Balanced: VTI, AGG, IYW';
-        } else if (score <= 150) {
+        } else if (score <= 140) {
             return 'Moderate Aggressive: VTI, IEMG, GLD';
-        } else if (score <= 171) {
+        } else if (score <= 159) {
             return 'Aggressive: BOTZ, IEMG, LIT';
-        } else if (score <= 192) {
+        } else if (score <= 178) {
             return 'Very Aggressive: BOTZ, LIT, GBTC';
         } else {
             return 'Highly Speculative: GBTC, LIT, BOTZ';
