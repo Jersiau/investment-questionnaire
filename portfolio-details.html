@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        p {
+            color: #555;
+        }
+        .graph {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Portfolio Details</h1>
+        <p id="portfolioDescription"></p>
+        <h2>Portfolio Composition</h2>
+        <p id="portfolioComposition"></p>
+    </div>
+
+    <script>
+        // Retrieve the portfolio from localStorage
+        const portfolio = localStorage.getItem('recommendedPortfolio');
+
+        // Define the portfolio compositions and weights
+        const portfolios = {
+            'Very Conservative: MUB, VCIT': {
+                composition: 'MUB: 30%, VCIT: 70%',
+                description: 'The portfolio is composed of Municipal Bonds (MUB) and Intermediate-Term Corporate Bonds (VCIT). MUB provides tax-exempt income, while VCIT offers exposure to investment-grade corporate bonds with intermediate maturities.'
+            },
+            'Conservative: AGG, MUB, ESGV': {
+                composition: 'AGG: 53%, MUB: 30%, ESGV: 18%',
+                description: 'This portfolio includes Aggregate Bond ETF (AGG), Municipal Bonds (MUB), and ESG Aware U.S. Stock ETF (ESGV). AGG provides broad exposure to the U.S. investment-grade bond market, MUB offers tax-exempt income, and ESGV focuses on companies with strong environmental, social, and governance practices.'
+            },
+            'Slightly Conservative: TLT, VCIT, ESGV': {
+                composition: 'TLT: 14%, VCIT: 71%, ESGV: 15%',
+                description: 'The portfolio is composed of Long-Term Treasury Bonds (TLT), Intermediate-Term Corporate Bonds (VCIT), and ESG Aware U.S. Stock ETF (ESGV). TLT provides exposure to long-term U.S. Treasury bonds, VCIT offers investment-grade corporate bonds, and ESGV focuses on sustainable companies.'
+            },
+            'Moderately Conservative: ITOT, AGG, MINT': {
+                composition: 'ITOT: 42%, AGG: 20%, MINT: 38%',
+                description: 'This portfolio includes Total U.S. Stock Market ETF (ITOT), Aggregate Bond ETF (AGG), and Short-Term Bond ETF (MINT). ITOT offers broad exposure to the U.S. stock market, AGG provides investment-grade bonds, and MINT focuses on short-term, high-quality bonds.'
+            },
+            'Balanced: VTI, AGG, IYW': {
+                composition: 'VTI: 35%, AGG: 55%, IYW: 10%',
+                description: 'The portfolio is composed of Total Stock Market ETF (VTI), Aggregate Bond ETF (AGG), and U.S. Technology ETF (IYW). VTI provides broad U.S. stock market exposure, AGG includes investment-grade bonds, and IYW focuses on the technology sector.'
+            },
+            'Moderate Aggressive: VTI, IEMG, GLD': {
+                composition: 'VTI: 32%, IEMG: 6%, GLD: 62%',
+                description: 'This portfolio includes Total Stock Market ETF (VTI), Emerging Markets ETF (IEMG), and Gold ETF (GLD). VTI offers U.S. stock market exposure, IEMG focuses on emerging markets, and GLD provides exposure to gold.'
+            },
+            'Aggressive: BOTZ, IEMG, LIT': {
+                composition: 'BOTZ: 38%, IEMG: 19%, LIT: 43%',
+                description: 'The portfolio is composed of Robotics & Artificial Intelligence ETF (BOTZ), Emerging Markets ETF (IEMG), and Lithium & Battery Tech ETF (LIT). BOTZ focuses on robotics and AI, IEMG on emerging markets, and LIT on lithium and battery technology.'
+            },
+            'Very Aggressive: BOTZ, LIT, GBTC': {
+                composition: 'BOTZ: 72%, LIT: 15%, GBTC: 12%',
+                description: 'This portfolio includes Robotics & Artificial Intelligence ETF (BOTZ), Lithium & Battery Tech ETF (LIT), and Bitcoin Trust (GBTC). BOTZ focuses on robotics and AI, LIT on lithium technology, and GBTC on Bitcoin.'
+            },
+            'Highly Speculative: GBTC, IVW, IEMG': {
+                composition: 'GBTC: 29%, IVW: 20%, IEMG: 51%',
+                description: 'The portfolio is composed of Bitcoin Trust (GBTC), S&P 500 Growth ETF (IVW), and Emerging Markets ETF (IEMG). GBTC provides exposure to Bitcoin, IVW focuses on growth stocks in the S&P 500, and IEMG on emerging markets.'
+            },
+            'Highly Speculative: GBTC, LIT, BOTZ': {
+                composition: 'GBTC: 27%, LIT: 20%, BOTZ: 53%',
+                description: 'This portfolio includes Bitcoin Trust (GBTC), Lithium & Battery Tech ETF (LIT), and Robotics & Artificial Intelligence ETF (BOTZ). GBTC offers exposure to Bitcoin, LIT to lithium technology, and BOTZ to robotics and AI.'
+            }
+        };
+
+        // Get the portfolio details based on the selected portfolio
+        const portfolioDetails = portfolios[portfolio];
+
+        // Display the portfolio composition and description
+        if (portfolioDetails) {
+            document.getElementById('portfolioDescription').innerText = `Your recommended portfolio is: ${portfolio}. Here is a detailed description of your portfolio:`;
+            document.getElementById('portfolioComposition').innerText = `Composition: ${portfolioDetails.composition}\n\n${portfolioDetails.description}`;
+        } else {
+            document.getElementById('portfolioDescription').innerText = 'No portfolio details available.';
+        }
+    </script>
+</body>
+</html>
