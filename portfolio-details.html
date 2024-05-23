@@ -72,8 +72,14 @@
         <p id="portfolioDescription"></p>
         <h2>Portfolio Composition</h2>
         <p id="portfolioComposition"></p>
+        <p id="portfolioReturn"></p>
+        <p id="portfolioVaR"></p>
         <div class="graph">
             <canvas id="portfolioChart" width="400" height="400"></canvas>
+        </div>
+        <h2>Expected Annual Returns and Volatility Comparison</h2>
+        <div class="graph">
+            <canvas id="comparisonChart" width="400" height="400"></canvas>
         </div>
     </div>
 
@@ -81,54 +87,94 @@
         // Retrieve the portfolio from localStorage
         const portfolio = localStorage.getItem('recommendedPortfolio');
 
-        // Define the portfolio compositions and weights
+        // Define the portfolio compositions, weights, returns, volatility, and VaR
         const portfolios = {
             'Very Conservative: MUB, VCIT': {
                 composition: { 'MUB': 30, 'VCIT': 70 },
-                description: 'The portfolio is composed of Municipal Bonds (MUB) and Intermediate-Term Corporate Bonds (VCIT). MUB provides tax-exempt income, while VCIT offers exposure to investment-grade corporate bonds with intermediate maturities.'
+                description: 'The portfolio is composed of Municipal Bonds (MUB) and Intermediate-Term Corporate Bonds (VCIT). MUB provides tax-exempt income, while VCIT offers exposure to investment-grade corporate bonds with intermediate maturities.',
+                return: 1.68,
+                volatility: 0.48,
+                var95: '0.89%',
+                var99: '0.56%'
             },
             'Conservative: AGG, MUB, ESGV': {
                 composition: { 'AGG': 53, 'MUB': 30, 'ESGV': 18 },
-                description: 'This portfolio includes Aggregate Bond ETF (AGG), Municipal Bonds (MUB), and ESG Aware U.S. Stock ETF (ESGV). AGG provides broad exposure to the U.S. investment-grade bond market, MUB offers tax-exempt income, and ESGV focuses on companies with strong environmental, social, and governance practices.'
+                description: 'This portfolio includes Aggregate Bond ETF (AGG), Municipal Bonds (MUB), and ESG Aware U.S. Stock ETF (ESGV). AGG provides broad exposure to the U.S. investment-grade bond market, MUB offers tax-exempt income, and ESGV focuses on companies with strong environmental, social, and governance practices.',
+                return: 3.45,
+                volatility: 7.00,
+                var95: '-8.07%',
+                var99: '-12.84%'
             },
             'Slightly Conservative: TLT, VCIT, ESGV': {
                 composition: { 'TLT': 14, 'VCIT': 71, 'ESGV': 15 },
-                description: 'The portfolio is composed of Long-Term Treasury Bonds (TLT), Intermediate-Term Corporate Bonds (VCIT), and ESG Aware U.S. Stock ETF (ESGV). TLT provides exposure to long-term U.S. Treasury bonds, VCIT offers investment-grade corporate bonds, and ESGV focuses on sustainable companies.'
+                description: 'The portfolio is composed of Long-Term Treasury Bonds (TLT), Intermediate-Term Corporate Bonds (VCIT), and ESG Aware U.S. Stock ETF (ESGV). TLT provides exposure to long-term U.S. Treasury bonds, VCIT offers investment-grade corporate bonds, and ESGV focuses on sustainable companies.',
+                return: 3.49,
+                volatility: 8.75,
+                var95: '-10.90%',
+                var99: '-16.87%'
             },
             'Moderately Conservative: ITOT, AGG, MINT': {
                 composition: { 'ITOT': 42, 'AGG': 20, 'MINT': 38 },
-                description: 'This portfolio includes Total U.S. Stock Market ETF (ITOT), Aggregate Bond ETF (AGG), and Short-Term Bond ETF (MINT). ITOT offers broad exposure to the U.S. stock market, AGG provides investment-grade bonds, and MINT focuses on short-term, high-quality bonds.'
+                description: 'This portfolio includes Total U.S. Stock Market ETF (ITOT), Aggregate Bond ETF (AGG), and Short-Term Bond ETF (MINT). ITOT offers broad exposure to the U.S. stock market, AGG provides investment-grade bonds, and MINT focuses on short-term, high-quality bonds.',
+                return: 7.46,
+                volatility: 9.50,
+                var95: '-8.17%',
+                var99: '-14.64%'
             },
             'Balanced: VTI, AGG, IYW': {
                 composition: { 'VTI': 35, 'AGG': 55, 'IYW': 10 },
-                description: 'The portfolio is composed of Total Stock Market ETF (VTI), Aggregate Bond ETF (AGG), and U.S. Technology ETF (IYW). VTI provides broad U.S. stock market exposure, AGG includes investment-grade bonds, and IYW focuses on the technology sector.'
+                description: 'The portfolio is composed of Total Stock Market ETF (VTI), Aggregate Bond ETF (AGG), and U.S. Technology ETF (IYW). VTI provides broad U.S. stock market exposure, AGG includes investment-grade bonds, and IYW focuses on the technology sector.',
+                return: 8.34,
+                volatility: 11.50,
+                var95: '-10.58%',
+                var99: '-18.41%'
             },
             'Moderate Aggressive: VTI, IEMG, GLD': {
                 composition: { 'VTI': 32, 'IEMG': 6, 'GLD': 62 },
-                description: 'This portfolio includes Total Stock Market ETF (VTI), Emerging Markets ETF (IEMG), and Gold ETF (GLD). VTI offers U.S. stock market exposure, IEMG focuses on emerging markets, and GLD provides exposure to gold.'
+                description: 'This portfolio includes Total U.S. Stock Market ETF (VTI), Emerging Markets ETF (IEMG), and Gold ETF (GLD). VTI offers U.S. stock market exposure, IEMG focuses on emerging markets, and GLD provides exposure to gold.',
+                return: 13.88,
+                volatility: 13.15,
+                var95: '-7.75%',
+                var99: '-16.71%'
             },
             'Aggressive: BOTZ, IEMG, LIT': {
                 composition: { 'BOTZ': 38, 'IEMG': 19, 'LIT': 43 },
-                description: 'The portfolio is composed of Robotics & Artificial Intelligence ETF (BOTZ), Emerging Markets ETF (IEMG), and Lithium & Battery Tech ETF (LIT). BOTZ focuses on robotics and AI, IEMG on emerging markets, and LIT on lithium and battery technology.'
+                description: 'The portfolio is composed of Robotics & Artificial Intelligence ETF (BOTZ), Emerging Markets ETF (IEMG), and Lithium & Battery Tech ETF (LIT). BOTZ focuses on robotics and AI, IEMG on emerging markets, and LIT on lithium and battery technology.',
+                return: 14.99,
+                volatility: 27.50,
+                var95: '-30.24%',
+                var99: '-48.98%'
             },
             'Very Aggressive: BOTZ, LIT, GBTC': {
                 composition: { 'BOTZ': 72, 'LIT': 15, 'GBTC': 12 },
-                description: 'This portfolio includes Robotics & Artificial Intelligence ETF (BOTZ), Lithium & Battery Tech ETF (LIT), and Bitcoin Trust (GBTC). BOTZ focuses on robotics and AI, LIT on lithium technology, and GBTC on Bitcoin.'
+                description: 'This portfolio includes Robotics & Artificial Intelligence ETF (BOTZ), Lithium & Battery Tech ETF (LIT), and Bitcoin Trust (GBTC). BOTZ focuses on robotics and AI, LIT on lithium technology, and GBTC on Bitcoin.',
+                return: 21.54,
+                volatility: 30.00,
+                var95: '-27.81%',
+                var99: '-48.25%'
             },
             'Speculative: GBTC, IVW, IEMG': {
                 composition: { 'GBTC': 29, 'IVW': 20, 'IEMG': 51 },
-                description: 'The portfolio is composed of Bitcoin Trust (GBTC), S&P 500 Growth ETF (IVW), and Emerging Markets ETF (IEMG). GBTC provides exposure to Bitcoin, IVW focuses on growth stocks in the S&P 500, and IEMG on emerging markets.'
+                description: 'The portfolio is composed of Bitcoin Trust (GBTC), S&P 500 Growth ETF (IVW), and Emerging Markets ETF (IEMG). GBTC provides exposure to Bitcoin, IVW focuses on growth stocks in the S&P 500, and IEMG on emerging markets.',
+                return: 28.87,
+                volatility: 32.50,
+                var95: '-24.59%',
+                var99: '-46.74%'
             },
             'Highly Speculative: GBTC, LIT, BOTZ': {
                 composition: { 'GBTC': 27, 'LIT': 20, 'BOTZ': 53 },
-                description: 'This portfolio includes Bitcoin Trust (GBTC), Lithium & Battery Tech ETF (LIT), and Robotics & Artificial Intelligence ETF (BOTZ). GBTC offers exposure to Bitcoin, LIT to lithium technology, and BOTZ to robotics and AI.'
+                description: 'This portfolio includes Bitcoin Trust (GBTC), Lithium & Battery Tech ETF (LIT), and Robotics & Artificial Intelligence ETF (BOTZ). GBTC offers exposure to Bitcoin, LIT to lithium technology, and BOTZ to robotics and AI.',
+                return: 29.46,
+                volatility: 35.00,
+                var95: '-28.11%',
+                var99: '-51.96%'
             }
         };
 
         // Get the portfolio details based on the selected portfolio
         const portfolioDetails = portfolios[portfolio];
 
-        // Display the portfolio composition and description
+        // Display the portfolio composition, description, return, volatility, and VaR
         if (portfolioDetails) {
             document.getElementById('portfolioDescription').innerText = `Your recommended portfolio is: ${portfolio}.`;
 
@@ -138,14 +184,16 @@
                 .join(', ');
 
             document.getElementById('portfolioComposition').innerText = `Composition: ${compositionStr}\n\n${portfolioDetails.description}`;
+            document.getElementById('portfolioReturn').innerText = `Expected Annual Return based on historical data: ${portfolioDetails.return}%\nAnnual Volatility: ${portfolioDetails.volatility}%`;
+            document.getElementById('portfolioVaR').innerText = `Value at Risk (VaR) 95% CI: ${portfolioDetails.var95}\nValue at Risk (VaR) 99% CI: ${portfolioDetails.var99}`;
 
-            // Extract labels and data for the chart
+            // Extract labels and data for the pie chart
             const labels = Object.keys(portfolioDetails.composition);
             const data = Object.values(portfolioDetails.composition);
 
-            // Create the chart
-            const ctx = document.getElementById('portfolioChart').getContext('2d');
-            const portfolioChart = new Chart(ctx, {
+            // Create the pie chart
+            const ctxPie = document.getElementById('portfolioChart').getContext('2d');
+            const portfolioChart = new Chart(ctxPie, {
                 type: 'pie',
                 data: {
                     labels: labels,
@@ -163,6 +211,78 @@
                         title: {
                             display: true,
                             text: `Portfolio Composition: ${portfolio}`
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const dataset = tooltipItem.dataset;
+                                    const currentValue = dataset.data[tooltipItem.dataIndex];
+                                    const total = dataset.data.reduce((acc, value) => acc + value, 0);
+                                    const percentage = ((currentValue / total) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${currentValue} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Extract data for the bar chart
+            const portfolioNames = Object.keys(portfolios);
+            const returnData = portfolioNames.map(name => portfolios[name].return);
+            const volatilityData = portfolioNames.map(name => portfolios[name].volatility);
+
+            // Highlight the selected portfolio
+            const highlightColor = '#FF6384';
+            const normalColor = '#36A2EB';
+            const backgroundColorsReturns = portfolioNames.map(name => name === portfolio ? highlightColor : normalColor);
+            const backgroundColorsVolatility = portfolioNames.map(name => name === portfolio ? highlightColor : normalColor);
+
+            // Create the bar chart
+            const ctxBar = document.getElementById('comparisonChart').getContext('2d');
+            const comparisonChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: portfolioNames,
+                    datasets: [
+                        {
+                            label: 'Expected Return (%)',
+                            data: returnData,
+                            backgroundColor: backgroundColorsReturns
+                        },
+                        {
+                            label: 'Volatility (%)',
+                            data: volatilityData,
+                            backgroundColor: backgroundColorsVolatility
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        title: {
+                            display: true,
+                            text: 'Expected Annual Returns and Volatility Comparison'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `${tooltipItem.dataset.label}: ${tooltipItem.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return `${value}%`;
+                                }
+                            }
                         }
                     }
                 }
