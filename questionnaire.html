@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboAdvisor Investment Questionnaire</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .banner {
+            width: 100%;
+            background-color: #000000ee;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 150px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        h1 {
+            color: #343a40;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        form div {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #6c757d;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .container {
+                padding: 20px;
+            }
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+            select, input[type="text"] {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="banner">
+        <div class="logo">
+            <img src="Red Lion Logo.jpeg" alt="Company Logo">
+        </div>
+    </div>
+    <div class="container">
+        <h1>RoboAdvisor Investment Questionnaire</h1>
+        <form id="questionnaire">
+            <!-- Personal Information -->
+            <div>
+                <label for="age">What is your age?</label>
+                <select id="age" name="age">
+                    <option value="5">20-30</option>
+                    <option value="4">31-40</option>
+                    <option value="3">41-50</option>
+                    <option value="2">51-60</option>
+                    <option value="1">Above 60</option>
+                </select>
+            </div>
+            <div>
+                <label for="income">What is your annual income?</label>
+                <select id="income" name="income">
+                    <option value="1">Under €25,000</option>
+                    <option value="2">€25,000 - €50,000</option>
+                    <option value="3">€50,001 - €100,000</option>
+                    <option value="4">€100,001 - €200,000</option>
+                    <option value="5">Above €200,000</option>
+                </select>
+            </div>
+            
+            <!-- Financial Goals -->
+            <div>
+                <label for="investmentGoal">What is your primary investment goal?</label>
+                <select id="investmentGoal" name="investmentGoal">
+                    <option value="1">Capital preservation</option>
+                    <option value="2">Income generation</option>
+                    <option value="3">Growth</option>
+                    <option value="4">Speculation</option>
+                </select>
+            </div>
+            <div>
+                <label for="investmentAmount">What percentage of your wealth do you want to invest?</label>
+                <select id="investmentAmount" name="investmentAmount">
+                    <option value="1">5%</option>
+                    <option value="2">10%</option>
+                    <option value="3">15%</option>
+                    <option value="4">20%</option>
+                    <option value="5">More than 25%</option>
+                </select>
+            </div>
+            <div>
+                <label for="investmentDuration">How long do you plan to keep this investment?</label>
+                <select id="investmentDuration" name="investmentDuration">
+                    <option value="1">Less than 1 year</option>
+                    <option value="2">1-3 years</option>
+                    <option value="3">3-5 years</option>
+                    <option value="4">5-10 years</option>
+                    <option value="5">More than 10 years</option>
+                </select>
+            </div>
+            
+            <!-- Risk Tolerance -->
+            <div>
+                <label for="riskTolerance">How would you describe your risk tolerance?</label>
+                <select id="riskTolerance" name="riskTolerance">
+                    <option value="1">Very low (prefer no risk)</option>
+                    <option value="2">Low (willing to accept minimal risk)</option>
+                    <option value="3">Moderate (balanced approach)</option>
+                    <option value="4">High (comfortable with significant risk)</option>
+                    <option value="5">Very high (aggressive approach)</option>
+                </select>
+            </div>
+            <div>
+                <label for="marketReaction">How would you react if your investment portfolio lost 20% of its value in a short period?</label>
+                <select id="marketReaction" name="marketReaction">
+                    <option value="1">Sell all investments to avoid further loss</option>
+                    <option value="2">Sell some investments</option>
+                    <option value="3">Do nothing and wait for a recovery</option>
+                    <option value="4">Buy more of the investments at a lower price</option>
+                </select>
+            </div>
+            
+            <!-- Investment Knowledge and Experience -->
+            <div>
+                <label for="investmentKnowledge">How would you rate your investment knowledge?</label>
+                <select id="investmentKnowledge" name="investmentKnowledge">
+                    <option value="1">None</option>
+                    <option value="2">Basic</option>
+                    <option value="3">Intermediate</option>
+                    <option value="4">Advanced</option>
+                    <option value="5">Expert</option>
+                </select>
+            </div>
+            <div>
+                <label for="investmentTypes">What types of investments have you made before?</label>
+                <select id="investmentTypes" name="investmentTypes">
+                    <option value="1">Savings accounts or CDs</option>
+                    <option value="2">Bonds</option>
+                    <option value="4">Stocks</option>
+                    <option value="3">Mutual funds or ETFs</option>
+                    <option value="2">Real estate</option>
+                </select>
+            </div>
+            
+            <!-- Other Considerations -->
+            <div>
+                <label for="sustainabilityImportance">How important is sustainability and ethical investing to you? (ESG)</label>
+                <select id="sustainabilityImportance" name="sustainabilityImportance">
+                    <option value="5">Not important</option>
+                    <option value="4">Somewhat important</option>
+                    <option value="3">Important</option>
+                    <option value="2">Very important</option>
+                    <option value="1">Extremely important</option>
+                </select>
+            </div>
+            <div>
+                <label for="liquidityNeeds">How important is liquidity (the ability to quickly access your money) to you?</label>
+                <select id="liquidityNeeds" name="liquidityNeeds">
+                    <option value="5">Not important</option>
+                    <option value="4">Somewhat important</option>
+                    <option value="3">Important</option>
+                    <option value="2">Very important</option>
+                    <option value="1">Extremely important</option>
+                </select>
+            </div>
+            <div>
+                <label for="marketEventReaction">How would you react to bad market events or news?</label>
+                <select id="marketEventReaction" name="marketEventReaction">
+                    <option value="1">Very negatively</option>
+                    <option value="2">Negatively</option>
+                    <option value="4">Neutral</option>
+                </select>
+            </div>
+            <div>
+                <label for="financialChanges">How likely are you to need to make significant changes to your financial situation in the next 5 years? (Real Estate, Car,...)</label>
+                <select id="financialChanges" name="financialChanges">
+                    <option value="5">Very unlikely</option>
+                    <option value="4">Unlikely</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Likely</option>
+                    <option value="1">Very likely</option>
+                </select>
+            </div>
+
+            <!-- New Question: Willingness to Invest in Crypto ETF -->
+            <div>
+                <label for="cryptoInvestment">Are you willing to invest in a portfolio that includes a cryptocurrency ETF? (Very Risky!)</label>
+                <select id="cryptoInvestment" name="cryptoInvestment">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+        <div id="result"></div>
+        <button id="moreInfoButton" style="display: none;" onclick="redirectToPortfolioDetails()">Want to know more about your portfolio?</button>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const totalScore = calculateBaseScore();
+    
+            const cryptoInvestment = document.getElementById('cryptoInvestment').value;
+            let portfolio = '';
+            if (cryptoInvestment === 'yes') {
+                if (totalScore < 185) {
+                    portfolio = 'Speculative: GBTC, IVW, IEMG';
+                } else {
+                    portfolio = 'Highly Speculative: GBTC, LIT, BOTZ';
+                }
+            } else {
+                portfolio = assignPortfolio(totalScore);
+            }
+    
+            document.getElementById('result').innerText = `Total Score: ${totalScore}\nRecommended Portfolio: ${portfolio}`;
+            document.getElementById('moreInfoButton').style.display = 'block';
+            localStorage.setItem('recommendedPortfolio', portfolio);
+        }
+    
+        function calculateBaseScore() {
+            const age = parseInt(document.getElementById('age').value);
+            const income = parseInt(document.getElementById('income').value);
+            const investmentGoal = parseInt(document.getElementById('investmentGoal').value);
+            const investmentDuration = parseInt(document.getElementById('investmentDuration').value);
+            const riskTolerance = parseInt(document.getElementById('riskTolerance').value);
+            const marketReaction = parseInt(document.getElementById('marketReaction').value);
+            const investmentKnowledge = parseInt(document.getElementById('investmentKnowledge').value);
+            const investmentTypes = parseInt(document.getElementById('investmentTypes').value);
+            const sustainabilityImportance = parseInt(document.getElementById('sustainabilityImportance').value);
+            const liquidityNeeds = parseInt(document.getElementById('liquidityNeeds').value);
+            const marketEventReaction = parseInt(document.getElementById('marketEventReaction').value);
+            const financialChanges = parseInt(document.getElementById('financialChanges').value);
+            const investmentAmount = parseInt(document.getElementById('investmentAmount').value);
+    
+            const weightedScores = {
+                age: age * 3,
+                income: income * 4,
+                investmentGoal: investmentGoal * 5,
+                investmentDuration: investmentDuration * 3,
+                riskTolerance: riskTolerance * 6,
+                marketReaction: marketReaction * 5,
+                investmentKnowledge: investmentKnowledge * 4,
+                investmentTypes: investmentTypes * 3,
+                sustainabilityImportance: sustainabilityImportance * 2,
+                liquidityNeeds: liquidityNeeds * 2,
+                marketEventReaction: marketEventReaction * 3,
+                financialChanges: financialChanges * 2,
+                investmentAmount: investmentAmount * 3
+            };
+    
+            return Object.values(weightedScores).reduce((acc, score) => acc + score, 0);
+        }
+    
+        function assignPortfolio(score) {
+            if (score <= 45) {
+                return 'Very Conservative: MUB, VCIT';
+            } else if (score <= 65) {
+                return 'Conservative: AGG, MUB, ESGV';
+            } else if (score <= 85) {
+                return 'Slightly Conservative: TLT, VCIT, ESGV';
+            } else if (score <= 105) {
+                return 'Moderately Conservative: ITOT, AGG, MINT';
+            } else if (score <= 125) {
+                return 'Balanced: VTI, AGG, IYW';
+            } else if (score <= 145) {
+                return 'Moderate Aggressive: VTI, IEMG, GLD';
+            } else if (score <= 165) {
+                return 'Aggressive: BOTZ, IEMG, LIT';
+            } else if (score <= 185) {
+                return 'Very Aggressive: BOTZ, LIT, GBTC';
+            } else if (score <= 209) {
+                return 'Speculative: GBTC, IVW, IEMG';
+            } else {
+                return 'Highly Speculative: GBTC, LIT, BOTZ';
+            }
+        }
+    
+        function redirectToPortfolioDetails() {
+            window.location.href = 'portfolio-details.html';
+        }
+    </script>
+    
