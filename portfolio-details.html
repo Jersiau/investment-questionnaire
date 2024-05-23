@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,6 +81,7 @@
         <div class="graph">
             <canvas id="comparisonChart" width="400" height="400"></canvas>
         </div>
+        <p id="varExplanation"></p>
     </div>
 
     <script>
@@ -219,7 +220,7 @@
                                     const currentValue = dataset.data[tooltipItem.dataIndex];
                                     const total = dataset.data.reduce((acc, value) => acc + value, 0);
                                     const percentage = ((currentValue / total) * 100).toFixed(2);
-                                    return `${tooltipItem.label}: ${currentValue} (${percentage}%)`;
+                                    return `${tooltipItem.label}: ${percentage}%`;
                                 }
                             }
                         }
@@ -228,15 +229,15 @@
             });
 
             // Extract data for the bar chart
-            const portfolioNames = Object.keys(portfolios);
-            const returnData = portfolioNames.map(name => portfolios[name].return);
-            const volatilityData = portfolioNames.map(name => portfolios[name].volatility);
+            const portfolioNames = Object.keys(portfolios).map(name => name.split(':')[0]);
+            const returnData = portfolioNames.map((name, index) => portfolios[Object.keys(portfolios)[index]].return);
+            const volatilityData = portfolioNames.map((name, index) => portfolios[Object.keys(portfolios)[index]].volatility);
 
             // Highlight the selected portfolio
             const highlightColor = '#FF6384';
             const normalColor = '#36A2EB';
-            const backgroundColorsReturns = portfolioNames.map(name => name === portfolio ? highlightColor : normalColor);
-            const backgroundColorsVolatility = portfolioNames.map(name => name === portfolio ? highlightColor : normalColor);
+            const backgroundColorsReturns = portfolioNames.map((name, index) => Object.keys(portfolios)[index] === portfolio ? highlightColor : normalColor);
+            const backgroundColorsVolatility = portfolioNames.map((name, index) => Object.keys(portfolios)[index] === portfolio ? highlightColor : normalColor);
 
             // Create the bar chart
             const ctxBar = document.getElementById('comparisonChart').getContext('2d');
@@ -276,6 +277,13 @@
                         }
                     },
                     scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 10 // Adjust the font size here
+                                }
+                            }
+                        },
                         y: {
                             beginAtZero: true,
                             ticks: {
@@ -287,6 +295,9 @@
                     }
                 }
             });
+
+            // Add a clear definition for VaR at the bottom of the page
+            document.getElementById('varExplanation').innerText = 'Definition of VaR (Value at Risk): VaR represents the maximum expected loss over a given time period, at a certain confidence level. For example, a 95% VaR of 8% means that there is a 95% chance that the portfolio will not lose more than 8% of its value over the specified period.';
         } else {
             document.getElementById('portfolioDescription').innerText = 'No portfolio details available.';
         }
