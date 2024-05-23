@@ -6,37 +6,49 @@
     <title>RoboAdvisor Investment Questionnaire</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .banner {
+            width: 100%;
+            background-color: #000000ee;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-        }
-        .logo {
             text-align: center;
-            margin-bottom: 20px;
         }
         .logo img {
-            max-width: 200px;
+            max-width: 150px;
+            margin: 0 auto 20px;
+            display: block;
         }
         h1 {
-            text-align: center;
-            color: #333;
+            color: #343a40;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         form div {
             margin-bottom: 15px;
+            text-align: left;
         }
         label {
             display: block;
             margin-bottom: 5px;
-            color: #555;
+            color: #6c757d;
         }
         select, input[type="text"] {
             width: 100%;
@@ -48,7 +60,7 @@
         button {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -56,6 +68,7 @@
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
@@ -68,15 +81,17 @@
             text-align: center;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="banner">
         <div class="logo">
-            <img src="Red Lion Logo.jpg" alt="Company Logo">
+            <img src="Red Lion Logo.jpeg" alt="Company Logo">
         </div>
+    </div>
+    <div class="container">
         <h1>RoboAdvisor Investment Questionnaire</h1>
         <form id="questionnaire">
-
             <!-- Personal Information -->
             <div>
                 <label for="age">What is your age?</label>
@@ -172,45 +187,46 @@
                     <option value="2">Real estate</option>
                 </select>
             </div>
-                    <!-- Other Considerations -->
-        <div>
-            <label for="sustainabilityImportance">How important is sustainability and ethical investing to you? (ESG)</label>
-            <select id="sustainabilityImportance" name="sustainabilityImportance">
-                <option value="5">Not important</option>
-                <option value="4">Somewhat important</option>
-                <option value="3">Important</option>
-                <option value="2">Very important</option>
-                <option value="1">Extremely important</option>
-            </select>
-        </div>
-        <div>
-            <label for="liquidityNeeds">How important is liquidity (the ability to quickly access your money) to you?</label>
-            <select id="liquidityNeeds" name="liquidityNeeds">
-                <option value="5">Not important</option>
-                <option value="4">Somewhat important</option>
-                <option value="3">Important</option>
-                <option value="2">Very important</option>
-                <option value="1">Extremely important</option>
-            </select>
-        </div>
-        <div>
-            <label for="marketEventReaction">How would you react to bad market events or news?</label>
-            <select id="marketEventReaction" name="marketEventReaction">
-                <option value="1">Very negatively</option>
-                <option value="2">Negatively</option>
-                <option value="4">Neutral</option>
-            </select>
-        </div>
-        <div>
-            <label for="financialChanges">How likely are you to need to make significant changes to your financial situation in the next 5 years? (Real Estate, Car,...)</label>
-            <select id="financialChanges" name="financialChanges">
-                <option value="5">Very unlikely</option>
-                <option value="4">Unlikely</option>
-                <option value="3">Neutral</option>
-                <option value="2">Likely</option>
-                <option value="1">Very likely</option>
-            </select>
-        </div>
+            
+            <!-- Other Considerations -->
+            <div>
+                <label for="sustainabilityImportance">How important is sustainability and ethical investing to you? (ESG)</label>
+                <select id="sustainabilityImportance" name="sustainabilityImportance">
+                    <option value="5">Not important</option>
+                    <option value="4">Somewhat important</option>
+                    <option value="3">Important</option>
+                    <option value="2">Very important</option>
+                    <option value="1">Extremely important</option>
+                </select>
+            </div>
+            <div>
+                <label for="liquidityNeeds">How important is liquidity (the ability to quickly access your money) to you?</label>
+                <select id="liquidityNeeds" name="liquidityNeeds">
+                    <option value="5">Not important</option>
+                    <option value="4">Somewhat important</option>
+                    <option value="3">Important</option>
+                    <option value="2">Very important</option>
+                    <option value="1">Extremely important</option>
+                </select>
+            </div>
+            <div>
+                <label for="marketEventReaction">How would you react to bad market events or news?</label>
+                <select id="marketEventReaction" name="marketEventReaction">
+                    <option value="1">Very negatively</option>
+                    <option value="2">Negatively</option>
+                    <option value="4">Neutral</option>
+                </select>
+            </div>
+            <div>
+                <label for="financialChanges">How likely are you to need to make significant changes to your financial situation in the next 5 years? (Real Estate, Car,...)</label>
+                <select id="financialChanges" name="financialChanges">
+                    <option value="5">Very unlikely</option>
+                    <option value="4">Unlikely</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Likely</option>
+                    <option value="1">Very likely</option>
+                </select>
+            </div>
 
             <!-- New Question: Willingness to Invest in Crypto ETF -->
             <div>
@@ -221,97 +237,96 @@
                 </select>
             </div>
 
-                    <!-- Submit Button -->
-        <button type="button" onclick="calculateScore()">Submit</button>
-    </form>
-    <div id="result"></div>
-    <button id="moreInfoButton" style="display: none;" onclick="redirectToPortfolioDetails()">Want to know more about your portfolio?</button>
-</div>
+            <!-- Submit Button -->
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+        <div id="result"></div>
+        <button id="moreInfoButton" style="display: none;" onclick="redirectToPortfolioDetails()">Want to know more about your portfolio?</button>
+    </div>
 
-<script>
-    function calculateScore() {
-        const totalScore = calculateBaseScore();
+    <script>
+        function calculateScore() {
+            const totalScore = calculateBaseScore();
 
-        // Get crypto investment choice
-        const cryptoInvestment = document.getElementById('cryptoInvestment').value;
-        let portfolio = '';
-        if (cryptoInvestment === 'yes') {
-            // Assign one of the two most risky portfolios based on the score
-            if (totalScore < 178) {
-                portfolio = 'Very Aggressive: BOTZ, LIT, GBTC';
+            // Get crypto investment choice
+            const cryptoInvestment = document.getElementById('cryptoInvestment').value;
+            let portfolio = '';
+            if (cryptoInvestment === 'yes') {
+                if (totalScore < 185) {
+                    portfolio = 'Speculative: GBTC, IYW, IEMG';
+                } else {
+                    portfolio = 'Highly Speculative: GBTC, LIT, BOTZ';
+                }
             } else {
-                portfolio = 'Highly Speculative: GBTC, LIT, BOTZ';
+                portfolio = assignPortfolio(totalScore);
             }
-        } else {
-            // Assign portfolio based on base score
-            portfolio = assignPortfolio(totalScore);
+
+            document.getElementById('result').innerText = `Total Score: ${totalScore}\nRecommended Portfolio: ${portfolio}`;
+            document.getElementById('moreInfoButton').style.display = 'block';
+            localStorage.setItem('recommendedPortfolio', portfolio);
         }
 
-        // Display results
-        document.getElementById('result').innerText = `Total Score: ${totalScore}\nRecommended Portfolio: ${portfolio}`;
-        document.getElementById('moreInfoButton').style.display = 'block';
-        localStorage.setItem('recommendedPortfolio', portfolio);
-    }
+        function calculateBaseScore() {
+            const age = parseInt(document.getElementById('age').value);
+            const income = parseInt(document.getElementById('income').value);
+            const investmentGoal = parseInt(document.getElementById('investmentGoal').value);
+            const investmentDuration = parseInt(document.getElementById('investmentDuration').value);
+            const riskTolerance = parseInt(document.getElementById('riskTolerance').value);
+            const marketReaction = parseInt(document.getElementById('marketReaction').value);
+            const investmentKnowledge = parseInt(document.getElementById('investmentKnowledge').value);
+            const investmentTypes = parseInt(document.getElementById('investmentTypes').value);
+            const sustainabilityImportance = parseInt(document.getElementById('sustainabilityImportance').value);
+            const liquidityNeeds = parseInt(document.getElementById('liquidityNeeds').value);
+            const marketEventReaction = parseInt(document.getElementById('marketEventReaction').value);
+            const financialChanges = parseInt(document.getElementById('financialChanges').value);
+            const investmentAmount = parseInt(document.getElementById('investmentAmount').value);
 
-    function calculateBaseScore() {
-        const age = parseInt(document.getElementById('age').value);
-        const income = parseInt(document.getElementById('income').value);
-        const investmentGoal = parseInt(document.getElementById('investmentGoal').value);
-        const investmentDuration = parseInt(document.getElementById('investmentDuration').value);
-        const riskTolerance = parseInt(document.getElementById('riskTolerance').value);
-        const marketReaction = parseInt(document.getElementById('marketReaction').value);
-        const investmentKnowledge = parseInt(document.getElementById('investmentKnowledge').value);
-        const investmentTypes = parseInt(document.getElementById('investmentTypes').value);
-        const sustainabilityImportance = parseInt(document.getElementById('sustainabilityImportance').value);
-        const liquidityNeeds = parseInt(document.getElementById('liquidityNeeds').value);
-        const marketEventReaction = parseInt(document.getElementById('marketEventReaction').value);
-        const financialChanges = parseInt(document.getElementById('financialChanges').value);
-        const investmentAmount = parseInt(document.getElementById('investmentAmount').value);
+            const weightedScores = {
+                age: age * 3,
+                income: income * 4,
+                investmentGoal: investmentGoal * 5,
+                investmentDuration: investmentDuration * 3,
+                riskTolerance: riskTolerance * 6,
+                marketReaction: marketReaction * 5,
+                investmentKnowledge: investmentKnowledge * 4,
+                investmentTypes: investmentTypes * 3,
+                sustainabilityImportance: sustainabilityImportance * 2,
+                liquidityNeeds: liquidityNeeds * 2,
+                marketEventReaction: marketEventReaction * 3,
+                financialChanges: financialChanges * 2,
+                investmentAmount: investmentAmount * 3
+            };
 
-        // Adjust weights according to the relevance of each question.
-        const weightedScores = {
-            age: age * 3,
-            income: income * 4,
-            investmentGoal: investmentGoal * 5,
-            investmentDuration: investmentDuration * 3,
-            riskTolerance: riskTolerance * 6,
-            marketReaction: marketReaction * 5,
-            investmentKnowledge: investmentKnowledge * 4,
-            investmentTypes: investmentTypes * 3,
-            sustainabilityImportance: sustainabilityImportance * 2,
-            liquidityNeeds: liquidityNeeds * 2,
-            marketEventReaction: marketEventReaction * 3,
-            financialChanges: financialChanges * 2,
-            investmentAmount: investmentAmount * 3
-        };
-
-        // Calculate the total score by summing all weighted scores.
-        return Object.values(weightedScores).reduce((acc, score) => acc + score, 0);
-    }
-
-    function assignPortfolio(score) {
-        if (score <= 45) {
-            return 'Very Conservative: MUB, VCIT';
-        } else if (score <= 64) {
-            return 'Conservative: AGG, MUB, ESGV';
-        } else if (score <= 83) {
-            return 'Slightly Conservative: TLT, VCIT, ESGV';
-        } else if (score <= 102) {
-            return 'Moderately Conservative: ITOT, AGG, MINT';
-        } else if (score <= 121) {
-            return 'Balanced: VTI, AGG, IYW';
-        } else if (score <= 140) {
-            return 'Moderate Aggressive: VTI, IEMG, GLD';
-        } else if (score <= 159) {
-            return 'Aggressive: BOTZ, IEMG, LIT';
-        } else if (score <= 178) {
-            return 'Very Aggressive: BOTZ, LIT, GBTC';
-        } else {
-            return 'Highly Speculative: GBTC, LIT, BOTZ';
+            return Object.values(weightedScores).reduce((acc, score) => acc + score, 0);
         }
-    }
 
-    function redirectToPortfolioDetails() {
-        window.location.href = 'portfolio-details.html';
-    }
-</script>
+        function assignPortfolio(score) {
+            if (score <= 45) {
+                return 'Very Conservative: MUB, VCIT';
+            } else if (score <= 65) {
+                return 'Conservative: AGG, MUB, ESGV';
+            } else if (score <= 85) {
+                return 'Slightly Conservative: TLT, VCIT, ESGV';
+            } else if (score <= 105) {
+                return 'Moderately Conservative: ITOT, AGG, MINT';
+            } else if (score <= 125) {
+                return 'Balanced: VTI, AGG, IYW';
+            } else if (score <= 145) {
+                return 'Moderate Aggressive: VTI, IEMG, GLD';
+            } else if (score <= 165) {
+                return 'Aggressive: BOTZ, IEMG, LIT';
+            } else if (score <= 185) {
+                return 'Very Aggressive: BOTZ, LIT, GBTC';
+            } else if (score <= 209) {
+                return 'Speculative: GBTC, IYW, IEMG';
+            } else {
+                return 'Highly Speculative: GBTC, LIT, BOTZ';
+            }
+        }
+
+        function redirectToPortfolioDetails() {
+            window.location.href = 'portfolio-details.html';
+        }
+    </script>
+</body>
+</html>

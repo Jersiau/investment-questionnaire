@@ -6,37 +6,53 @@
     <title>Welcome to Red Lion Capital</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .banner {
+            width: 100%;
+            background-color: #000000ee;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
         }
         .container {
+            width: 90%;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 30px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             text-align: center;
         }
         .logo img {
-            max-width: 200px;
+            max-width: 150px;
+            margin: 0 auto 20px;
+            display: block;
         }
         h1 {
-            color: #333;
+            color: #343a40;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         p {
-            color: #555;
+            color: #6c757d;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
         .disclaimer {
-            color: #d9534f;
+            color: #dc3545;
             font-weight: bold;
         }
         .start-button {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -44,18 +60,21 @@
             font-size: 16px;
             cursor: pointer;
             text-decoration: none;
-            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
         .start-button:hover {
             background-color: #0056b3;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="banner">
         <div class="logo">
-            <img src="Red Lion Logo.jpg" alt="Company Logo">
+            <img src="Red Lion Logo.jpeg" alt="Company Logo">
         </div>
+    </div>
+    <div class="container">
         <h1>Welcome to Red Lion Capital</h1>
         <p>
             Red Lion Capital is a premier financial institution established by a group of seven finance experts from diverse backgrounds. Our combined expertise in financial markets has enabled us to create a robust platform for managing investments and providing exceptional financial advice.

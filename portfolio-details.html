@@ -1,37 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Details</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
+            width: 90%;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 30px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            text-align: center;
         }
         h1 {
-            text-align: center;
-            color: #333;
+            color: #343a40;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         h2 {
-            color: #555;
+            color: #343a40;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
         p {
-            color: #555;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
         .graph {
             margin-top: 20px;
             text-align: center;
         }
+        canvas {
+            margin-top: 20px;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -39,6 +56,9 @@
         <p id="portfolioDescription"></p>
         <h2>Portfolio Composition</h2>
         <p id="portfolioComposition"></p>
+        <div class="graph">
+            <canvas id="portfolioChart" width="400" height="400"></canvas>
+        </div>
     </div>
 
     <script>
@@ -48,43 +68,43 @@
         // Define the portfolio compositions and weights
         const portfolios = {
             'Very Conservative: MUB, VCIT': {
-                composition: 'MUB: 30%, VCIT: 70%',
+                composition: { 'MUB': 30, 'VCIT': 70 },
                 description: 'The portfolio is composed of Municipal Bonds (MUB) and Intermediate-Term Corporate Bonds (VCIT). MUB provides tax-exempt income, while VCIT offers exposure to investment-grade corporate bonds with intermediate maturities.'
             },
             'Conservative: AGG, MUB, ESGV': {
-                composition: 'AGG: 53%, MUB: 30%, ESGV: 18%',
+                composition: { 'AGG': 53, 'MUB': 30, 'ESGV': 18 },
                 description: 'This portfolio includes Aggregate Bond ETF (AGG), Municipal Bonds (MUB), and ESG Aware U.S. Stock ETF (ESGV). AGG provides broad exposure to the U.S. investment-grade bond market, MUB offers tax-exempt income, and ESGV focuses on companies with strong environmental, social, and governance practices.'
             },
             'Slightly Conservative: TLT, VCIT, ESGV': {
-                composition: 'TLT: 14%, VCIT: 71%, ESGV: 15%',
+                composition: { 'TLT': 14, 'VCIT': 71, 'ESGV': 15 },
                 description: 'The portfolio is composed of Long-Term Treasury Bonds (TLT), Intermediate-Term Corporate Bonds (VCIT), and ESG Aware U.S. Stock ETF (ESGV). TLT provides exposure to long-term U.S. Treasury bonds, VCIT offers investment-grade corporate bonds, and ESGV focuses on sustainable companies.'
             },
             'Moderately Conservative: ITOT, AGG, MINT': {
-                composition: 'ITOT: 42%, AGG: 20%, MINT: 38%',
+                composition: { 'ITOT': 42, 'AGG': 20, 'MINT': 38 },
                 description: 'This portfolio includes Total U.S. Stock Market ETF (ITOT), Aggregate Bond ETF (AGG), and Short-Term Bond ETF (MINT). ITOT offers broad exposure to the U.S. stock market, AGG provides investment-grade bonds, and MINT focuses on short-term, high-quality bonds.'
             },
             'Balanced: VTI, AGG, IYW': {
-                composition: 'VTI: 35%, AGG: 55%, IYW: 10%',
+                composition: { 'VTI': 35, 'AGG': 55, 'IYW': 10 },
                 description: 'The portfolio is composed of Total Stock Market ETF (VTI), Aggregate Bond ETF (AGG), and U.S. Technology ETF (IYW). VTI provides broad U.S. stock market exposure, AGG includes investment-grade bonds, and IYW focuses on the technology sector.'
             },
             'Moderate Aggressive: VTI, IEMG, GLD': {
-                composition: 'VTI: 32%, IEMG: 6%, GLD: 62%',
+                composition: { 'VTI': 32, 'IEMG': 6, 'GLD': 62 },
                 description: 'This portfolio includes Total Stock Market ETF (VTI), Emerging Markets ETF (IEMG), and Gold ETF (GLD). VTI offers U.S. stock market exposure, IEMG focuses on emerging markets, and GLD provides exposure to gold.'
             },
             'Aggressive: BOTZ, IEMG, LIT': {
-                composition: 'BOTZ: 38%, IEMG: 19%, LIT: 43%',
+                composition: { 'BOTZ': 38, 'IEMG': 19, 'LIT': 43 },
                 description: 'The portfolio is composed of Robotics & Artificial Intelligence ETF (BOTZ), Emerging Markets ETF (IEMG), and Lithium & Battery Tech ETF (LIT). BOTZ focuses on robotics and AI, IEMG on emerging markets, and LIT on lithium and battery technology.'
             },
             'Very Aggressive: BOTZ, LIT, GBTC': {
-                composition: 'BOTZ: 72%, LIT: 15%, GBTC: 12%',
+                composition: { 'BOTZ': 72, 'LIT': 15, 'GBTC': 12 },
                 description: 'This portfolio includes Robotics & Artificial Intelligence ETF (BOTZ), Lithium & Battery Tech ETF (LIT), and Bitcoin Trust (GBTC). BOTZ focuses on robotics and AI, LIT on lithium technology, and GBTC on Bitcoin.'
             },
-            'Highly Speculative: GBTC, IVW, IEMG': {
-                composition: 'GBTC: 29%, IVW: 20%, IEMG: 51%',
+            'Speculative: GBTC, IVW, IEMG': {
+                composition: { 'GBTC': 29, 'IVW': 20, 'IEMG': 51 },
                 description: 'The portfolio is composed of Bitcoin Trust (GBTC), S&P 500 Growth ETF (IVW), and Emerging Markets ETF (IEMG). GBTC provides exposure to Bitcoin, IVW focuses on growth stocks in the S&P 500, and IEMG on emerging markets.'
             },
             'Highly Speculative: GBTC, LIT, BOTZ': {
-                composition: 'GBTC: 27%, LIT: 20%, BOTZ: 53%',
+                composition: { 'GBTC': 27, 'LIT': 20, 'BOTZ': 53 },
                 description: 'This portfolio includes Bitcoin Trust (GBTC), Lithium & Battery Tech ETF (LIT), and Robotics & Artificial Intelligence ETF (BOTZ). GBTC offers exposure to Bitcoin, LIT to lithium technology, and BOTZ to robotics and AI.'
             }
         };
@@ -94,8 +114,43 @@
 
         // Display the portfolio composition and description
         if (portfolioDetails) {
-            document.getElementById('portfolioDescription').innerText = `Your recommended portfolio is: ${portfolio}. Here is a detailed description of your portfolio:`;
-            document.getElementById('portfolioComposition').innerText = `Composition: ${portfolioDetails.composition}\n\n${portfolioDetails.description}`;
+            document.getElementById('portfolioDescription').innerText = `Your recommended portfolio is: ${portfolio}.`;
+
+            // Convert the composition object to a readable string
+            const compositionStr = Object.entries(portfolioDetails.composition)
+                .map(([key, value]) => `${key}: ${value}%`)
+                .join(', ');
+
+            document.getElementById('portfolioComposition').innerText = `Composition: ${compositionStr}\n\n${portfolioDetails.description}`;
+
+            // Extract labels and data for the chart
+            const labels = Object.keys(portfolioDetails.composition);
+            const data = Object.values(portfolioDetails.composition);
+
+            // Create the chart
+            const ctx = document.getElementById('portfolioChart').getContext('2d');
+            const portfolioChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: `Portfolio Composition: ${portfolio}`
+                        }
+                    }
+                }
+            });
         } else {
             document.getElementById('portfolioDescription').innerText = 'No portfolio details available.';
         }
