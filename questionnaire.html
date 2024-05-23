@@ -265,25 +265,24 @@
     <script>
         function calculateScore() {
             const totalScore = calculateBaseScore();
-
-            // Get crypto investment choice
+    
             const cryptoInvestment = document.getElementById('cryptoInvestment').value;
             let portfolio = '';
             if (cryptoInvestment === 'yes') {
                 if (totalScore < 185) {
-                    portfolio = 'Speculative: GBTC, IYW, IEMG';
+                    portfolio = 'Speculative: GBTC, IVW, IEMG';
                 } else {
                     portfolio = 'Highly Speculative: GBTC, LIT, BOTZ';
                 }
             } else {
                 portfolio = assignPortfolio(totalScore);
             }
-
+    
             document.getElementById('result').innerText = `Total Score: ${totalScore}\nRecommended Portfolio: ${portfolio}`;
             document.getElementById('moreInfoButton').style.display = 'block';
             localStorage.setItem('recommendedPortfolio', portfolio);
         }
-
+    
         function calculateBaseScore() {
             const age = parseInt(document.getElementById('age').value);
             const income = parseInt(document.getElementById('income').value);
@@ -298,7 +297,7 @@
             const marketEventReaction = parseInt(document.getElementById('marketEventReaction').value);
             const financialChanges = parseInt(document.getElementById('financialChanges').value);
             const investmentAmount = parseInt(document.getElementById('investmentAmount').value);
-
+    
             const weightedScores = {
                 age: age * 3,
                 income: income * 4,
@@ -314,10 +313,10 @@
                 financialChanges: financialChanges * 2,
                 investmentAmount: investmentAmount * 3
             };
-
+    
             return Object.values(weightedScores).reduce((acc, score) => acc + score, 0);
         }
-
+    
         function assignPortfolio(score) {
             if (score <= 45) {
                 return 'Very Conservative: MUB, VCIT';
@@ -336,15 +335,14 @@
             } else if (score <= 185) {
                 return 'Very Aggressive: BOTZ, LIT, GBTC';
             } else if (score <= 209) {
-                return 'Speculative: GBTC, IYW, IEMG';
+                return 'Speculative: GBTC, IVW, IEMG';
             } else {
                 return 'Highly Speculative: GBTC, LIT, BOTZ';
             }
         }
-
+    
         function redirectToPortfolioDetails() {
             window.location.href = 'portfolio-details.html';
         }
     </script>
-</body>
-</html>
+    
